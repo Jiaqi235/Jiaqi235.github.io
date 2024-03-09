@@ -171,7 +171,6 @@ form label {
     align-items: stretch;
     padding: 20px;
     margin: 10px;
-    border-radius: 50px;
     overflow: hidden;
 }
 
@@ -180,6 +179,7 @@ form label {
     background-color: #B2BAD2;
     padding: 20px;
     margin: 10px;
+    border-radius: 10px;
     text-align: center;
 }
 
