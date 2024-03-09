@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+  <script src="js/jquery.js"></script> 
+  <script> 
+  $(function(){
+    $("#header").load("header.html");
+    $("#footer").load("footer.html");
+  });
+  </script> 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prácticas de FHiC - LingoAtlas - Contacto</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/contact.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+    <main class="content bg-secondary-alt">
+      <h1>Contacto</h1>
+      <p>Rellenad este formulario para ponerse en contacto con nosotros.</p>
+
+      <div class="contact-form-container">
+        <form class="contact-form">
+            <p>Información personal</p>
+            <label for="contact-name">Nombre *</label>
+            <input id="contact-name" type="text" name="name" required="true" />
+            <label for="contact-email" >Dirección de correo *</label>
+            <input id="contact-email" type="email" name="email" placeholder="example@example.com" required="true" />
+            
+            <p>Mensaje</p>
+            <label for="contact-topic">Tema *</label>
+            <input id="contact-topic" type="text" name="topic" placeholder="Escribe tu tema..." required="true" />
+            <label for="contact-body">Detalles *</label>
+            <textarea id="contact-body" placeholder="Escribe tu mensaje..." required="true" ></textarea>
+  
+            <p class="small-note">* Campo obligatorio</p>
+  
+            <input id="contact-submit" class="form-button" type="submit" name="submit" value="Enviar" />
+        </form>
+        <aside class="aside-info">
+          <p>Este formulario es obra de uno de nuestros magníficos diseñadores, siguiendo los siguientes principios de diseño de formularios:</p>
+          <ul>
+              <li>Pedir solo la mínima información requerida</li>
+              <li>Ordenación lógica de elementos</li>
+              <li>Agrupar información relacionada</li>
+              <li>Layout de 1 columna</li>
+              <li>Pocos campos visibles a la vez</li>
+              <li>Ningún valor por defecto en los campos</li>
+              <li>Verificación de campos (ex. formato correcto de e-mail)</li>
+              <li>Uso de labels para campos, y su posicionamiento a la parte superior de los campos</li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+    <div id="footer"></div>
+  </body>
+</html>
