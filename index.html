@@ -1,64 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
-<script src="js/jquery.js"></script> 
-<script> 
-$(function(){
-  $("#header").load("header.html");
-  $("#footer").load("footer.html");
-});
+<script src="js/jquery.js"></script>
+<script>
+    $(function(){
+        $("#header").load("header.html");
+        $("#footer").load("footer.html");
+    });
 </script>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prácticas de FHiC - LingoAtlas - Index</title>
-  <link rel="stylesheet" href="./styles/main.css">
-  <link rel="stylesheet" href="./styles/index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prácticas de FHiC - LingoAtlas - Index</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/index.css">
 </head>
+
 <body>
 <div id="header"></div>
-<header>
-  <h1>Web del Grupo AF7</h1>
-  <p>¡Bienvenidos a la página web del grupo AF7! Aquí encontraréis toda la información
-    relacionada con nuestro grupo y nuestro proyecto web LingoAtlas.</p>
-</header>
+<div class="container" id="indexContainerMain">
+    <h1>Web del Grupo AF7</h1>
+    <h2>¡Bienvenidos a la página web del grupo AF7!</h2>
+    <em>Aquí encontraréis toda la información relacionada con nuestro grupo y nuestro proyecto web LingoAtlas.</em>
 
-<section id="project-info">
-  <h2>Información del proyecto</h2>
-  <p>
-    Aprender idiomas no solo es memorizar, es una experiencia.
-    Para aquellos entusiastas de los idiomas que se pasan horas buscando material de calidad
-    o que no saben la forma más eficiente para aprender cada idioma. LingoAtlas busca
-    proporcionar la mayor diversidad de recursos para aprender, donde vas a ver que memorizar,
-    no siempre es la estrategia más eficiente. ¡Y donde podrás acceder a recursos de calidad en
-    un solo click!
-  </p>
-  <a href="proyecto.html">Más información</a>
-</section>
+    <div class="container" id="indexFlexboxMain">
+        <div class="item">
+            <h3>Información del proyecto</h3>
+            <p>
+                Aprender idiomas no solo es memorizar, es una experiencia.
+                Para aquellos entusiastas de los idiomas que se pasan horas buscando material de calidad
+                o que no saben la forma más eficiente para aprender cada idioma. LingoAtlas busca
+                proporcionar la mayor diversidad de recursos para aprender, donde vas a ver que memorizar,
+                no siempre es la estrategia más eficiente. ¡Y donde podrás acceder a recursos de calidad en
+                un solo click!
+            </p>
+            <a href="proyecto.html">Más información</a>
+        </div>
+    </div>
 
-<section id="members">
-  <h2>Miembros del grupo</h2>
-  <p>
-    <img src="img/Kamil.png" alt="Kamil Natan" style="width:100px">
-    <img src="img/Jiaqi.png" alt="Jiaqi Li" style="width:100px">
-    <img src="img/Paula.png" alt="Paula Díez" style="width:100px">
-    <img src="img/Arnau.png" alt="Arnau Bolos" style="width:100px">
-    <br> Kamil Natan - Desarrollador
-    <br> Jiaqi Li - Desarrollador
-    <br> Paula Díez - Desarrollador
-    <br> Arnau Bolos - Desarrollador
-  </p>
-  <a href="nosotros.html">Más información</a>
-</section>
+    <div class="container" id="indexFlexboxMain">
+        <div class="item">
+            <h3>Miembros del grupo</h3>
+            <p>
+                <img src="img/Kamil.png" alt="Kamil Natan" style="width:100px">
+                <img src="img/Jiaqi.png" alt="Jiaqi Li" style="width:100px">
+                <img src="img/Paula.png" alt="Paula Díez" style="width:100px">
+                <img src="img/Arnau.png" alt="Arnau Bolos" style="width:100px">
+                <br> Kamil Natan - Desarrollador
+                <br> Jiaqi Li - Desarrollador
+                <br> Paula Díez - Desarrollador
+                <br> Arnau Bolos - Desarrollador
+            </p>
+            <a href="nosotros.html">Más información</a>
+        </div>
+    </div>
 
-<section id="contact">
-  <h2>Contacto</h2>
-  <p>Si tenéis alguna opinión o sugerencia sobre nuestro proyecto web podéis contactar con
-    nosotros <a href="contacto.html">aquí</a>.</p>
-</section>
+    <h3>Contacto</h3>
+    <p>
+        Si tenéis alguna opinión o sugerencia sobre nuestro proyecto web podéis contactar con
+        nosotros <a href="contacto.html">aquí</a>.
+    </p>
+</div>
 
-<footer>
-  <p>Copyright &copy; FHiC 23-24 - LingoAtlas</p>
-</footer>
-<div id="footer"></div>
+    <footer>
+        <p>Copyright &copy; FHiC 23-24 - LingoAtlas</p>
+    </footer>
+    <div id="footer"></div>
+
+</div>
 </body>
 </html>

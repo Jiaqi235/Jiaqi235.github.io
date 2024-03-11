@@ -187,6 +187,36 @@ form label {
     background-color: #C4D2E9;
 }
 
+/* Index page */
+#indexContainerMain {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#indexFlexboxMain {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    padding: 20px;
+    margin: 10px;
+    overflow: hidden;
+}
+
+#indexFlexboxMain .item {
+    height: 100%;
+    background-color: #B2BAD2;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#indexFlexboxMain .item:nth-child(even) {
+    background-color: #C4D2E9;
+}
+
 /* About us page */
 #aboutUsFlexboxMainContainer {
     display: flex;
