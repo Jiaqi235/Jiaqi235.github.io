@@ -14,11 +14,11 @@ hr {
     align-items: stretch; /* Make items stretch to fill the height */
 }
 
-.bg-primary {
+.bg-primary-color {
     background-color: #E8EFD1;
 }
 
-.bg-secondary {
+.bg-secondary-color {
     background-color: #CADB95;
 }
 
@@ -96,23 +96,6 @@ body {
 
 /* Contact page */
 
-.contact-form-container {
-    display: flex;
-    flex: 0 0 0;
-    flex-direction: row;
-    align-items: start;
-    justify-content: center;
-    gap: 25px;
-    margin-top: auto;
-    margin-bottom: auto;
-    flex-wrap: wrap;
-}
-
-.contact-form {
-    flex-grow: 1;
-    max-width: 500px;
-}
-
 .aside-info {
     max-width: 500px;
 }
@@ -145,8 +128,7 @@ form label {
 }
 
 .form-button {
-    width: 100px;
-    height: 30px;
+    width: 80%;
     margin: auto;
 }
 
@@ -154,36 +136,27 @@ form label {
     font-size: small;
     font-weight: normal;
     margin: 3px;
+    margin-bottom: 15px;
 }
 
 /* Project page */
 
 #projectContainerMain {
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-#projectFlexboxMain {
-    display: flex;
-    justify-content: space-around;
-    align-items: stretch;
-    padding: 20px;
-    margin: 10px;
-    overflow: hidden;
-}
-
-#projectFlexboxMain .item {
-    height: 100%;
-    background-color: #B2BAD2;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 10px;
     text-align: center;
 }
 
-#projectFlexboxMain .item:nth-child(even) {
+#projectContainerMain * {
+    margin: 20px 0;
+}
+
+#projectGridMain .col-md-3 {
+    background-color: #B2BAD2;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+}
+
+#projectGridMain .col-md-3:nth-child(even) {
     background-color: #C4D2E9;
 }
 
@@ -266,8 +239,9 @@ form label {
     display: flex;
     flex-direction: row; /* Set each item to display as rows */
     align-items: center;
-    padding: 20px;
-    width: 85%;
+    text-align: left;
+    padding: 30px;
+    width: 100%;
     margin: 10px;
     border-radius: 20px;
 }
@@ -284,8 +258,11 @@ form label {
 .text {
     flex: 1;}
 
-.image {
-    margin: 10px;
+.item:nth-child(odd) .image {
+    margin-left: 100px;
+}
+.item:nth-child(even) .image {
+margin-right: 100px;
 }
 
 .image img {
