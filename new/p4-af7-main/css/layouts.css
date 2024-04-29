@@ -1,0 +1,36 @@
+
+/* Combination of d-flex flex-column align-items-center */
+.flex-centered-column {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.absolute-top-right {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.min-height-100 {
+  min-height: 100%;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}

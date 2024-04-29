@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LingoAtlas - Learn Vocabulary</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- https://anseki.github.io/leader-line/ -->
+    <script src="leader-line.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="/datepicker.css" />
+    <link rel="stylesheet" href="/practice/results.css" />
+    <link rel="stylesheet" href="exercises.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "../../vue.esm-browser.min.js"
+        }
+      }
+    </script>
+    <script src="exercises.js" type="module"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Modal -->
+      <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+          <div class="modal-content">
+            <div class="modal-header modal-grey-header">
+              <h5 class="modal-title" id="helpModalLabel">Reading Comprehension Exercises</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body  ">
+              <p>Press words on the left side and right side to match them with their definition, synonym or context on the right side.<br><br>You may check your answers after matching all words.</p>
+            </div>
+            <div class="modal-footer modal-grey-footer">
+              <button class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid p-0 d-flex flex-column">
+        <navbar :current-page="'Practice'" :sub-page="'Reading'"></navbar>
+
+        <!-- Toast -->
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong class="me-auto">{{ toastHeader }}</strong>
+          </div>
+          <div class="toast-body">
+            {{ toastBody }}
+          </div>
+        </div>
+
+        <!-- Ensure some minimum spacing between navbar and content -->
+        <div class="my-1"></div>
+
+        <!-- Main content -->
+        <div v-if="!showingResults" class="container border rounded my-auto position-relative">
+          <div class="absolute-top-right">
+            <div class="d-flex">
+              <iconbutton :icon="'bi-question-lg'" :tooltip="'Help'" :is-dummy="false" @click="showHelp"></iconbutton>
+            </div>
+          </div>
+          <h1 class="text-center mt-4">Reading Comprehension Exercises</h1>
+          <div class="d-flex justify-content-center">
+            <div id="exercisesCarousel" class="carousel slide w-100">
+              <div class="carousel-inner w-100">
+                <div class="carousel-item active w-100">
+                  <exercise :exercise-index="0" :left-options="exercises[0].leftOptions" :right-options="exercises[0].rightOptions" :exercise="exercises[0]" @wrong-answer="onWrongAnswer"/>
+                </div>
+                <!-- Needs to be done in this weird way to not screw up the Bootstrap carousel; first slide needs to have active class and cannot be v-bound -->
+                <div v-for="(exercise, index) in otherExercises" class="carousel-item">
+                  <exercise :exercise-index="index + 1" :left-options="exercise.leftOptions" :right-options="exercise.rightOptions" :exercise="exercise" @wrong-answer="onWrongAnswer"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <exerciseresults v-else :session-type="'Reading Comprehension'" :words="mistakesPerWord" :correct-answers="getCorrectAnswersCount()" :total-questions="totalQuestions"></exerciseresults>
+        <pagefooter></pagefooter>
+      </div>
+    </div>
+
+    <!-- Exercise component template -->
+    <template id="exercise-template">
+      <div class="container my-auto">
+        <h2 class="text-center my-3">Exercise {{ exerciseIndex + 1 }}/{{ $parent.exercises.length }}</h2>
+        <p class="text-center">{{ exercise.description }}</p>
+        <div class="d-flex justify-content-around">
+          <!-- Left words column -->
+          <div class="flex-centered-column word-column">
+            <p class="text-centered my-0">Words</p>
+            <hr class="w-100">
+            <button v-for="(optionIndex, index) in leftOptionsOrder" :id="exerciseIndex + 'LeftOption' + optionIndex" class="btn btn-exercise-option my-2" :class="leftButtonClass(optionIndex)" @click="selectLeftOption(optionIndex)">
+              <span v-if="isLeftPairCorrect(optionIndex)"><i class="bi bi-check-lg"></i></span>
+              {{ leftOptions[optionIndex] }}
+            </button>
+          </div>
+
+          <div class="mx-2"></div>
+
+          <!-- Right words column -->
+          <div class="flex-centered-column word-column">
+            <p class="text-centered my-0">{{ exercise.rightOptionsName }}</p>
+            <hr class="w-100">
+            <button v-for="(optionIndex, index) in rightOptionsOrder" :id="exerciseIndex + 'RightOption' + optionIndex" class="btn btn-exercise-option my-2" :class="rightButtonClass(optionIndex)" @click="selectRightOption(optionIndex)">
+              <span v-if="isRightPairCorrect(optionIndex)"><i class="bi bi-check-lg"></i></span>
+              {{ rightOptions[optionIndex] }}
+            </button>
+          </div>
+        </div>
+        <!-- Check/quit buttons -->
+        <div class="container d-flex justify-content-center my-4">
+          <button v-if="!checked" class="btn btn-primary bottom-btn mx-2" :class="{'disabled': !canCheck}" @click="check()">Check</button>
+          <button v-if="checked" class="btn btn-success bottom-btn mx-2" @click="nextExercise">Continue</button>
+          <button class="btn btn-outline-danger bottom-btn mx-2" @click="requestQuit">Quit</button>
+        </div>
+      </div>
+    </template>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  </body>
+</html>

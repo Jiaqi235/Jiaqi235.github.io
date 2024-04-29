@@ -1,0 +1,56 @@
+
+.exercise-header {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.exercises-container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  max-width: 800px;
+  background-color: white;
+}
+
+.exercise-buttons-container {
+  width: 100%;
+  max-width: 400px !important;
+}
+
+.exercise-info {
+  max-width: 600px;
+}
+
+.btn-exercise {
+  width: 100%;
+  height: 50px;
+}
+
+.btn-exercise-large {
+  height: 50px;
+  width: 100%;
+}
+
+.exercise-field {
+  border-bottom: 1px black dotted;
+}
+
+.exercise-field > input {
+  border-style: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: transparent;
+  /* text-decoration: underline; */
+}
+
+.exercise-field-correct {
+  background-color: lightgreen;
+}
+
+.exercise-field-incorrect {
+  background-color: lightcoral;
+}
+
+.exercise-img {
+  width: 10em;
+}

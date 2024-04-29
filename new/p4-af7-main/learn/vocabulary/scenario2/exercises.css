@@ -1,0 +1,53 @@
+
+.exercise-header {
+    margin-top: 1em;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.exercise-buttons-container {
+    width: 100%;
+    max-width: 400px !important;
+}
+
+.exercise-title {
+    color: #333;
+}
+
+.language-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.word-list {
+    flex: 1;
+    margin: 0 1rem;
+}
+
+.word {
+    background-color: #f0f0f0;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.word:hover {
+    background-color: #e0e0e0;
+}
+
+.selected {
+    background-color: #cfd8dc !important;
+}
+
+.exercises-container {
+    padding: 1rem;
+    background-color: #fafafa;
+}
+
+#check-button {
+    margin-top: 1rem;
+}
+
+/* Estilos adicionales para la página si es necesario */

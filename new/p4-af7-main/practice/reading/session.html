@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Topic icons by Twitter/X, "Twemoji" https://github.com/twitter/twemoji, CC-BY-4.0 -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LingoAtlas - Practice Reading</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="session.css">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "../../vue.esm-browser.min.js"
+      }
+    }
+  </script>
+  <script>
+    $(document).ready(function () {
+      $("#helpModal").modal('show');
+    });
+  </script>
+  <script src="session.js" type="module"></script>
+
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- TODO, remove strange x padding???-->
+    <div class="container-fluid p-0 d-flex flex-column">
+      <navbar :current-page="'Practice'" :sub-page="'Reading'"></navbar>
+      <div class="selectArticleContainer row">
+
+        <div class="col-sm-12 my-2 justify-content-end">
+
+          <div class="topToolsContainer">
+            <div class="dropdown" :title="isDisabled ? 'Not available for your current resolution.' : ''">
+              <button class="btn btn-primary dropdown-toggle mx-1" type="button" id="fold-dropdown"
+                data-bs-toggle="dropdown" aria-expanded="false" :disabled="isDisabled">
+                <span>{{ selectedText }}</span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="fold-dropdown">
+                <li><a class="dropdown-item" :class="{'active': selectedText == 'Unfolded'}"
+                    @click="updateSelectedOption('unfolded')" href="#">Unfolded
+                  </a></li>
+                <li><a class="dropdown-item" :class="{'active': selectedText == 'Folded'}"
+                    @click="updateSelectedOption('folded')" href="#">Folded</a></li>
+              </ul>
+            </div>
+
+            <button class="btn btn-secondary mx-3 position-relative" @click="notImplemented" data-bs-toggle="tooltip"
+              aria-label="Listen" data-bs-original-title="Listen"><i class="bi img-fluid bi-ear"></i></button>
+            <button class="btn btn-secondary btn-help mx-1" data-bs-toggle="modal" data-bs-target="#extendedHelpModal">
+              <i class="bi bi-question-lg"></i>
+            </button>
+            <!-- Modal of help button TODO Speaker button?-->
+            <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-content">
+                  <div class="modal-header modal-grey-header">
+                    <h5 class="modal-title" id="helpModalLabel">Reading Comprehension</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                      @click="showToolbarTutorial"></button>
+                  </div>
+                  <div class="modal-body  ">
+                    <p>Read the article and take note of the words you wish to practice. After you're done reading,
+                      you'll be presented with exercises to solve using those words.</p>
+                  </div>
+                  <div class="modal-footer modal-grey-footer">
+                    <button class="btn btn-primary" data-bs-dismiss="modal" @click="showToolbarTutorial">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Extended help modal -->
+            <div class="modal fade" id="extendedHelpModal" tabindex="-1" aria-labelledby="extendedHelpModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header modal-grey-header">
+                    <h5 class="modal-title" id="extendedHelpModalLabel">Reading Comprehension</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Read the article and take note of the words you wish to practice. After you're done reading,
+                      you'll be presented with exercises to solve using those words.</p>
+                    <hr>
+                    <p>Use the highlighters in the toolbar at the bottom to mark words you wish to study later, or use
+                      the magnifying glass to look up their definitions.</p>
+                  </div>
+                  <div class="modal-footer modal-grey-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal"
+                      data-bs-target="#extendedHelpModal2">Next</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="extendedHelpModal2" tabindex="-1" aria-labelledby="extendedHelpModalLabel2"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header modal-grey-header">
+                    <h5 class="modal-title" id="extendedHelpModalLabel2">Reading Comprehension</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Options in the top right:
+                    <ul>
+                      <li><b>Book View</b>: switch between showing a single page <i>("Folded")</i> or two at a time
+                        <i>("Unfolded")</i>.</li>
+                      <li><b>Listen</b>: play text-to-speech audio for the article.</li>
+                      <!-- Redundant, the user already pressed it to come here -->
+                      <!-- <li><b>Help</b>: opens these instructions.</li> -->
+                    </ul>
+                    <hr>
+                    Shortcuts: <br>
+                    <ul>
+                      <li><b>T</b>: toggle toolbar.</li>
+                      <li><b>X</b>: toggle book view.</li>
+                      <li><b>Left Arrow</b>: go to previous page.</li>
+                      <li><b>Right Arrow</b>: go to next page.</li>
+                      <li><b>1</b>: yellow highlight.</li>
+                      <li><b>2</b>: green highlight.</li>
+                      <li><b>3</b>: magenta highlight.</li>
+                      <li><b>4</b>: dictionary lookup.</li>
+                      <li><b>Esc</b>: view mode.</li>
+                    </ul>
+                  </div>
+                  <div class="modal-footer modal-grey-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dictionary modal -->
+          <div class="modal fade" id="dictModal" tabindex="-1" aria-labelledby="dictModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header modal-header-dict">
+                  <h5 class="modal-title" id="dictModalLabel">Dictionary</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <strong>{{ wordToSearch }}</strong><button class="btn btn-secondary mx-1 position-relative"
+                    @click="notImplemented" data-bs-toggle="tooltip" aria-label="Listen"
+                    data-bs-original-title="Listen"><i class="bi img-fluid bi-ear"></i></button>
+                  <hr>
+                  <div class="toggle-container">
+                    <div v-if="selectedPronunciation === 'Phonetic'">
+                      <p class="toggle-separator">[phonetic of {{ wordToSearch }}]</p>
+                    </div>
+                    <div v-else>
+                      <p class="toggle-separator">/IPA of {{ wordToSearch }} /</p>
+                    </div>
+                    <div class="dropdown">
+                      <button class="btn btn-primary dropdown-toggle" type="button" id="speaker-dropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <span>{{ selectedPronunciation }}</span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="fold-dropdown">
+                        <li><a class="dropdown-item" @click="selectedPronunciation = 'Phonetic'"
+                            :class="{'active': selectedPronunciation == 'Phonetic'}"> Phonetic </a></li>
+                        <li><a class="dropdown-item" @click="selectedPronunciation = 'IPA'"
+                            :class="{'active': selectedPronunciation == 'IPA'}"> IPA </a></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <hr>
+                  <!-- https://www.dictionary.com/browse/atmosphere#google_vignette -->
+                  <strong>[here would go the word class]</strong><button
+                    class="btn btn-secondary mx-1 position-relative" @click="notImplemented" data-bs-toggle="tooltip"
+                    aria-label="Listen" data-bs-original-title="Listen"><i class="bi img-fluid bi-ear"></i></button><br>
+                  1. Here would go the first definition:<br>
+                  <span class="quoteHighlight">&nbsp;</span> and an example usage of the word.
+                  <br>
+                  2. Here goes the second definition:<br>
+                  <span class="quoteHighlight">&nbsp;</span> here would go another example of the new definition.
+                  <br>
+                  3. Here goes the third definition:<br>
+                  <span class="quoteHighlight">&nbsp;</span> Another quotation with the third definition.
+                  <br>
+                  4. Here goes the final definition:<br>
+                  <span class="quoteHighlight">&nbsp;</span> The last example of the word.
+                </div>
+
+                <div class="modal-footer modal-footer-dict">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div v-if="isFolded()">
+            <div id="text-container-book" :class="['book-container-folded']" @mouseover="highlightWord"
+              @click="toggleHighlight">
+
+              <div class="folded-page-wrapper">
+
+                <button type="button" @click="prevPage" class="btn image-button-icon" v-if="!isLowResolution()" :class="[{'hide-element': isLimitPage('left') === false}]
+            "><img class="page-buttons-size" src="/img/session/arrow_left.png" alt="Next page"></button>
+
+                <div class="center-page">
+                  <div class="text-container">
+                    <p v-html="formattedText(centerPageIndex)"></p>
+                    <div v-if="getIsLastPage()">
+                      <div class="center">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#navExercisesModal"
+                          class="btn btn-success finish-reading-button ">Finish reading</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="page-index-center"> <button type="button" @click="prevPage"
+                      class="btn image-button-icon mx-5" v-if="isLowResolution()"
+                      :class="[{'hide-element': isLimitPage('left') === false}]"><img class="page-buttons-size"
+                        src="/img/session/arrow_left.png" alt="Next page"></button>{{ centerPageIndex }} <button
+                      type="button" @click="nextPage" class="btn image-button-icon mx-5" v-if="isLowResolution()"
+                      :class="[{'hide-element': isLimitPage('right') === false}]"><img class="page-buttons-size"
+                        src="/img/session/arrow_right.png" alt="Previous page"> </button></div>
+                </div>
+                <div class="center-page-right"></div>
+
+                <button type="button" @click="nextPage" class="btn image-button-icon" v-if="!isLowResolution()"
+                  :class="[{'hide-element': isLimitPage('right') === false}]"><img class="page-buttons-size"
+                    src="/img/session/arrow_right.png" alt="Previous page"> </button>
+              </div>
+
+            </div>
+          </div>
+          <div v-else>
+            <div id="text-container-book" :class="['book-container']" @click="toggleHighlight"
+              @mouseover="highlightWord">
+              <div class="page-wrapper">
+                <button type="button" @click="prevPage" class="btn image-button-icon"
+                  :class="[{'hide-element': isLimitPage('left') === false}]"><img class="page-buttons-size"
+                    src="/img/session/arrow_left.png" alt="Next page"></button>
+
+                <div class="left-page">
+                  <div class="text-container">
+                    <p v-html="formattedText(leftPageIndex)"></p>
+                    <div v-if="getIsLastPage(leftPageIndex)">
+                      <div class="center">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#navExercisesModal"
+                          class="btn btn-success finish-reading-button ">Finish reading</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="page-index-left">{{ leftPageIndex }}</div>
+                </div>
+                <div class="right-page">
+                  <div class="text-container">
+                    <p v-html="formattedText(rightPageIndex)"></p>
+                    <div v-if="getIsLastPage(rightPageIndex)">
+                      <div class="center">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#navExercisesModal"
+                          class="btn btn-success finish-reading-button ">Finish reading</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="page-index-right">{{ rightPageIndex }}</div>
+                </div>
+
+                <button type="button" @click="nextPage" class="btn image-button-icon"
+                  :class="[{'hide-element': isLimitPage('right') === false}]"><img class="page-buttons-size"
+                    src="/img/session/arrow_right.png" alt="Previous page"> </button>
+              </div>
+            </div>
+          </div>
+          <!-- <p> {{markedWords}} {{leftPageIndex}} {{centerPageIndex}} {{rightPageIndex}}</p> -->
+          <div id="controls" class="toolbar-container">
+            <div class="container">
+              <div class="button-container">
+                <div class="panel" :class="{ 'panel-open': panelOpen}">
+                  <button @click="setFormatting('highlight_y')" class="image-button toolbar-item-size"
+                    :class="{ 'toolbar-items-selected-light': selectedFormatting == 'highlight_y' }"
+                    data-bs-toggle="tooltip" title="Yellow Highlighter" data-bs-trigger="hover"><img
+                      class="toolbar-item-size" src="/img/session/highlighter_yellow.svg"
+                      alt="Yellow highlighter"></button>
+                  <button @click="setFormatting('highlight_g')" class="image-button toolbar-item-size"
+                    :class="{ 'toolbar-items-selected-light': selectedFormatting == 'highlight_g' }"
+                    data-bs-toggle="tooltip" title="Green Highlighter" data-bs-trigger="hover"><img
+                      class="toolbar-item-size" src="/img/session/highlighter_green.svg"
+                      alt="Green highlighter"></button>
+                  <button @click="setFormatting('highlight_m')" class="image-button toolbar-item-size"
+                    :class="{ 'toolbar-items-selected-light': selectedFormatting == 'highlight_m' }"
+                    data-bs-toggle="tooltip" title="Magenta Highlighter" data-bs-trigger="hover"><img
+                      class="toolbar-item-size" src="/img/session/highlighter_magenta.svg"
+                      alt="Magenta highlighter"></button>
+                  <button @click="setFormatting('dict')" class="image-button toolbar-item-size"
+                    :class="{ 'toolbar-items-selected-dark': selectedFormatting == 'dict' }" data-bs-toggle="tooltip"
+                    title="Dictionary Lookup" data-bs-trigger="hover"><img class="toolbar-item-size"
+                      src="/img/session/magnifying_glass.svg" alt="Dictionary lookup"></button>
+                  <div data-bs-toggle="tooltip" title="Clear Highlights" data-bs-trigger="hover">
+                    <button data-bs-toggle="modal" data-bs-target="#clearAllModal"
+                      class="image-button toolbar-item-size"><img class="toolbar-item-size"
+                        src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f5d1.svg"
+                        alt="Clear All"></button>
+
+                  </div>
+                </div>
+
+                <!-- Toolbar tutorial toast -->
+                <div id="toolbarTutorialToast" class="toast toolbar-toast" role="alert" data-bs-autohide="false"
+                  aria-live="assertive" aria-atomic="true">
+                  <div class="toast-header">
+                    <strong class="me-auto">Highlighters &amp; Tools</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                  <div class="toast-body">
+                    Use the highlighers below to mark words on the text that you wish to study, or use the magnifying
+                    glass to look up their definitions.
+                  </div>
+                </div>
+
+                <div v-if="isPanelOpen()">
+                  <button class="flip-button btn btn-secondary" @click="togglePanel">Hide Toolbar</button>
+                </div>
+                <div v-else>
+                  <button class="flip btn btn-primary" @click="togglePanel">Show Toolbar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--  TODO, help update help button description, add a book icon to folded unfolded?-->
+          <div class="modal fade" id="clearAllModal" tabindex="-1" aria-labelledby="clearAllModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="clearAllModalLabel">Clear Highlights</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  This operation will clear all the highlights you have made on the text. Are you sure you want to
+                  proceed?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" @click="setFormatting('clearAll')"
+                    data-bs-dismiss="modal">Yes</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="navExercisesModal" tabindex="-1" aria-labelledby="navExercisesModallLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="navExercisesModalLabel">Finish Reading</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Finish reading and continue to this article's exercises?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" @click="goToExercises"
+                    data-bs-dismiss="modal">Yes</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="my-auto"></div>
+          <pagefooter></pagefooter>
+        </div>
+      </div>
+    </div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+</body>
+
+</html>

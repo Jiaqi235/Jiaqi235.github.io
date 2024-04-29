@@ -1,0 +1,12 @@
+
+.listening-instructions-container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+}
+
+@media screen and (min-width: 992px) {
+  .listening-instructions-container {
+    max-width: 65%;
+  }
+}

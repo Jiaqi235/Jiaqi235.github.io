@@ -1,0 +1,521 @@
+#text-container.disable-selection {
+  user-select: none; /* Avoid user to modify directly the text */
+  pointer-events: none; /* Disable pointer events */
+}
+
+#text-container {
+  margin-bottom: 10px;
+  min-height: 100px;
+  line-height: 1.5;
+}
+
+
+
+::selection {
+    background: none; /* Don't show selection */
+}
+
+.highlighted {
+  background-color: yellow; /* Set the background color for highlighting */
+
+}
+
+.highlight_y {
+  background-color: rgb(255, 255, 123); /* Set the background color for highlighting */
+}
+
+.highlight_g {
+  background-color: lightgreen; /* Set the background color for highlighting */
+}
+
+.highlight_m {
+  background-color: lightpink; /* Set the background color for highlighting */
+}
+
+.hover-word {
+  outline: auto;
+}
+
+#selected-color-preview {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+/* SelectArticle*/
+.topToolsContainer {
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    align-items: center;
+    width: 100%;
+  }
+  
+  #theme-dropdown {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-right: 10px;
+  }
+  
+  #help-button {
+    padding: 5px;
+    height: 35px;
+    width: 35px;
+    border-radius: 35px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #help-button:hover {
+    background-color: #0056b3;
+  }
+
+
+  /* Book folding*/
+
+  .text-container {
+    column-gap: 20px;
+  }
+  .disable-selection {
+    user-select: none;
+  }
+  .book-container {
+    display: flex;
+    position: relative;
+
+    padding-right: 200px;
+    padding-left: 200px;
+    /* background-color: #000000; */
+  }
+  
+  .page-wrapper {
+    display: flex;
+    flex-grow: 1;
+
+    height: 710px;
+    width: 800px;
+  }
+  .bottom-buttons {
+    position: absolute;    
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  
+  .left-page,
+  .right-page {
+    width: 50%;
+    padding: 2%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Align content vertically */
+
+    border-top: 1px solid #725846af;
+    border-bottom: 1px solid #725846af;
+  }
+  .left-page {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    
+    background-image: url("/img/session/book_left.png");
+
+    border-left: 8px solid #725846af;
+
+  }
+  
+  .right-page {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+    background-image: url("/img/session/book_right.png");
+    border-right: 8px solid #725846af;
+  }.book-container-folded {
+    /* background-color: #000000; */
+    display: flex;
+    position: relative;
+    margin: 0.75rem auto; /* Default margin for all screen sizes */
+  }
+  
+  @media (min-width: 576px) {
+    .book-container-folded {
+      margin: 1.5rem auto; /* Adjusted margin for small screens and above */
+    }
+  }
+
+
+  @media (min-width: 800px) {
+    .book-container-folded {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .book-container-folded {
+      padding-left: 8rem;
+      padding-right: 8rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .book-container-folded {
+      padding-left: 17rem;
+      padding-right: 17rem;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .book-container-folded {
+      padding-left: 23rem;
+      padding-right: 23rem;
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .book-container-folded {
+      padding-left: 30rem;
+      padding-right: 30rem;
+    }
+  }
+
+  @media (min-width: 1800px) {
+    .book-container-folded {
+      padding-left: 37rem;
+      padding-right: 37rem;
+    }
+  }
+  
+
+  .folded-page-wrapper {
+    display: flex;
+    padding: 10px;
+  }
+  
+  .center-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 3%;
+
+    background-color: antiquewhite;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-left: 8px solid #725846af;
+    
+    background-image: url("/img/session/book_left.png");
+
+  }
+  
+  .text-container {
+    height: 700px; /* Adjust as needed */
+    overflow-y: auto;
+    margin-bottom: 50px;
+    width: 100%;
+
+  }
+  
+  .page-index-center {
+    padding-bottom: 5px;
+    position: absolute;
+    bottom: 0;
+  }
+
+  
+  .center-page-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 5%;
+    padding: 2%;
+    background-color: antiquewhite;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: 1px solid #725846af;
+    border-bottom: 1px solid #725846af;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("/img/session/book_right.png");
+  }
+  
+
+
+  /* Page index */
+
+
+  .page-index-left,
+  .page-index-right {
+    text-align: center;
+  }
+  
+  .page-index-left {
+    align-self: center;
+  }
+  
+  .page-index-right {
+    align-self: center;
+  }
+  /* Button container*/
+
+  
+
+  .button-container-control {
+    width: 150px; /* Adjust the width as needed */
+    height: 150px; /* Adjust the height as needed */
+    font-size: 18px; /* Adjust the font size as needed */
+    position: fixed;
+    bottom: 10px; /* Adjust the bottom position as needed */
+    right: 50%;
+    
+  }
+  
+  .controler-right {
+    /* CSS rules for the right position */
+    rotate: 0deg;
+  }
+  
+  .controler-center {
+    /* CSS rules for the center position */
+    rotate: -90deg;
+  }
+
+  
+
+
+
+/* toogle pronunciation */
+.toggle-container {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-separator {
+  margin: 0 10px;
+}
+
+.quoteHighlight {
+  background-color: rgb(112, 112, 112);
+  margin-left: 2%;  
+  margin-right: 1%;
+}
+.modal-dict {
+  position: absolute;
+  z-index: 10040;
+  overflow: auto;
+  overflow-y: auto;
+}
+.modal-dict-pos-right {
+  right: 20%;
+}
+.modal-dict-pos-left {
+  left: 20%;
+}
+
+
+.modal-backdrop-dict {
+  background-color: rgba(0, 0, 0, 0.425);
+}
+
+.modal-body-dict {
+  background-color: rgb(255, 255, 255);
+}
+
+.modal-header-dict {
+  background-color: rgb(212, 238, 172);
+}
+
+.modal-footer-dict {
+  background-color: rgb(212, 238, 172);
+}
+
+/* controls -> update according needs*/
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+
+.pageControlContainer {
+  display: flex;
+  justify-content: center; /* Align items to the right */
+  
+  align-items: center;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.image-button {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-button-icon {
+  width: 100px;
+  height: 100%;
+}
+
+.image-button span {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.toolbar-item-size {
+  width: 100%;
+  height: 100%;
+}
+
+/* Panel tools: https://codepen.io/Rajeevnadh/pen/rvgrYv */
+.toolbar-container {
+  position: relative;
+}
+
+.container {
+  padding-top: 40px; /* Adjust top padding to make space for the button */
+}
+
+.button-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* Align items to the bottom */
+}
+
+.panel {
+  width: 100%;
+  height: 100px; /* Adjust height if needed */
+  display: none;
+  border: #bdbdbd 1px solid;
+  background:rgb(199, 199, 199);
+}
+
+.panel-open {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.hover-button {
+  padding: 20px;
+  cursor: pointer;
+}
+
+.flip-button {
+  position: absolute;
+  top: 0; /* Position at the top */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%);
+  margin-top: -37px; /* Adjust top margin as needed */
+}
+
+.image-button {
+  margin: 0 50px; /* Adjust margin between buttons */
+}
+
+.page-buttons-size {
+  width: 50px; /* Default width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.toolbar-item-size {
+  width: 85px; /* Default width */
+  margin: 0 2px; /* Adjust margin between items */
+  height: auto; /* Maintain aspect ratio */  
+}
+
+/* For items that are light colored*/
+.toolbar-items-selected-light {
+  border: 2px solid #000; /* Add border to the selected item */
+  border-radius: 10px;
+  background-color: #686868;
+  padding: 5px;
+}
+
+/* For items that are dark colored*/
+.toolbar-items-selected-dark {
+  border: 2px solid #000; /* Add border to the selected item */
+  border-radius: 10px;
+  background-color: #eeffe9;
+  padding: 5px;
+}
+
+@media (max-width: 768px) {
+  .toolbar-item-size {
+    width: 70px; /* Adjust width for small screens */
+  }
+}
+
+.exercises-button-icon {
+  width: 100px;
+  height: 100px;
+}
+.exercises-button
+{
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#app {
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+.center {
+  margin: 0 auto; /* This centers the element horizontally */
+  text-align: center; /* This centers the inline content inside the element */
+}
+.hide-element {
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+.toolbar-toast {
+  position: absolute;
+  right: 50%;
+  transform: translateX(-50%);
+  bottom: 200%;
+}
+
+.finish-reading-button {
+  padding: 10px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.finish-reading-button:hover,
+.finish-reading-button:active {
+  background-color: rgb(0, 90, 0);
+}

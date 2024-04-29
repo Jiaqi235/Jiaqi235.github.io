@@ -1,0 +1,17 @@
+
+.results-grid > div > div {
+  min-height: 100%;
+}
+
+.user-avatar {
+  max-height: 200px !important;
+}
+
+.btn-results {
+  max-width: 200px;
+  height: 50px;
+}
+
+.btn-word-select {
+  max-width: 120px;
+}
