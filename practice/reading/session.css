@@ -223,13 +223,13 @@
   .text-container {
     height: 700px; /* Adjust as needed */
     overflow-y: auto;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
     width: 100%;
 
   }
   
   .page-index-center {
-    padding-bottom: 5px;
+    padding-bottom: 0px;
     position: absolute;
     bottom: 0;
   }
