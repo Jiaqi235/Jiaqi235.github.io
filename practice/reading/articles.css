@@ -20,21 +20,9 @@
   width: 300px;
   border: 1px solid #000000;
   border-radius: 5px;
-  margin-right: 0;
+  margin-right: 10px;
 }
 
-#search-button {
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: 1px solid #000000;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-}
-
-#search-button:hover {
-  background-color: #0056b3;
-}
 
 #theme-dropdown {
   padding: 10px;
@@ -47,5 +35,6 @@
   /* No idea why these need be different to align with the cards */
   padding-left: 1.6rem;
   padding-right: 1.2rem;
+  margin-bottom: 10px;
 }
   

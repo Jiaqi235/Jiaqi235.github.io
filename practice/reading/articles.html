@@ -41,10 +41,10 @@
 
             <!--  Search bar and filters + help button TODO, add events when searching, dropDown listener, auto resize-->
             <div class="selectArticleContainer row">
-              <div class="col d-flex flex-wrap top-bar">
+              <div class="col d-flex flex-wrap top-bar align-items-center">
                 <input type="text" id="search-bar" v-model="searchQuery" placeholder="Search...">
   
-                <button class="btn btn-primary dropdown dropdown-toggle mx-3" type="button" id="theme-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-primary dropdown dropdown-toggle my-2" type="button" id="theme-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                   <span>{{ dropDownText }}</span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="theme-dropdown">
