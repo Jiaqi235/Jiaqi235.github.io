@@ -58,43 +58,43 @@
                     </div>
                   </div>
                 </div>
-
-                <!-- Audio area -->
-                <!-- The audio is extracted from: https://learnenglishteens.britishcouncil.org/skills/listening/c1-listening/help-others-help-yourself -->
-                <div class="my-1" :class="{'col-lg-6': checked, 'col': !checked}">
-                  <audioplayer :audio-title="'Help others help yourself'" :audio-description="'Listen to an interview of young volunteers for sports centers and organizations.'" :audio-name="'help_others_help_yourself.mp3'" :audio-play-count="playCount" :checked="checked" @audio-ended="handleAudioEnded"></audio-player>
-                </div>
-
+                
                 <!-- Transcript -->
                 <div v-if="checked" class="col-lg-6 listening-transcript my-1">
                   <div class="w-100 border rounded">
                     <h2 class="text-center my-1">Transcript</h2>
   
                     <p class="listening-transcript-text">
-                      <br><br>Interviewer: Today I'm going to talk to two young people who are both doing voluntary work in the sports sector. First there's Liam Parker, who is a keen BMX biker and does a lot of work at a sports centre. And then there's Debbie Sanford, who has volunteered to help with many different sports, and who now has a paid job with a sports organisation. So, Liam, tell us a bit about the place you work - it sounds really interesting.
+                      Interviewer: Today I'm going to talk to two young people who are both doing voluntary work in the sports sector. First there's Liam Parker, who is a keen BMX biker and does a lot of work at a sports centre. And then there's Debbie Sanford, who has volunteered to help with many different sports, and who now has a paid job with a sports organisation. So, Liam, tell us a bit about the place you work - it sounds really interesting.
                       <br><br>Liam: Yes, it's really cool. Basically it's a huge space where lots of sports and cultural events take place. It used to be a shipbuilding hangar, but the company went bust years ago. The building was taken over and completely renovated and repurposed about five years ago. Now we have facilities for all kinds of urban sports like skateboarding, breakdancing, Parkour, kick scooter ...
                       <br><br>Interviewer: Hang on a moment, can you explain the last two?
-                      <br><br>Liam: A kick scooter is just a normal scooter with a handlebar, deck and wheels. But now we have stunt scooters and special ones for racing. And Parkour has been around for a while now. It's a way of moving around an urban environment - it developed from military training. It involves climbing, running, vaulting, jumping, swinging and stuff like that. Everyone's seen it on TV and videos, people jumping off incredibly high buildings, between roofs and things.
+                      <br><br>Liam: A kick scooter is just a normal scooter with a handlebar, deck and wheels. But now we have stunt scooters and special ones for racing. <span class="transcript-answer"><b>(Q1 Answer) </b>And Parkour has been around for a while now. It's a way of moving around an urban environment - it developed from military training. It involves climbing, running, vaulting, jumping, swinging and stuff like that. Everyone's seen it on TV and videos, people jumping off incredibly high buildings, between roofs and things.</span>
                       <br><br>Interviewer: So what are you involved with?
-                      <br><br>Liam: My passion is for BMX, and I want to get other people involved in the sport. But I do all kinds of things at the centre. I make sure the bikes and scooters meet safety standards. I check the tracks and ramps so that they are clean and no one can slip and hurt themselves. I teach kids the basics of BMX and do demonstrations. I sometimes cook in the burger van too.
+                      <br><br>Liam: My passion is for BMX, and I want to get other people involved in the sport. But I do all kinds of things at the centre. I make sure the bikes and scooters meet safety standards. I check the tracks and ramps so that they are clean and no one can slip and hurt themselves. <span class="transcript-answer"><b>(Q2 Answer) </b>I teach kids the basics of BMX and do demonstrations. I sometimes cook in the burger van too.</span>
                       <br><br>Interviewer: Right, so you've learned a lot of skills?
-                      <br><br>Liam: Yeah. At first I was a bit nervous about speaking to groups, but now I have no problem giving safety inductions to people. I had to learn sports-specific first aid in case anyone hurts themselves, cooking hygiene for the burger van, maths for taking money at the till. I've had a lot of training in different areas and gained useful certificates.
+                      <br><br>Liam: Yeah. At first I was a bit nervous about speaking to groups, but now I have no problem giving safety inductions to people. <span class="transcript-answer"><b>(Q3 Answer) </b>I had to learn sports-specific first aid in case anyone hurts themselves, cooking hygiene for the burger van, maths for taking money at the till. I've had a lot of training in different areas and gained useful certificates.</span>
                       <br><br>Interviewer: So all that training will be valuable when you come to look for paid work?
                       <br><br>Liam: Absolutely. I'm still only 18 and I've been volunteering for two years. I'd like to stay in this sector and find full-time paid work, so obviously all my experience and skills will help a lot.
                       <br><br>Interviewer: Thank you, Liam. And now, our other guest has made that jump from voluntary work to paid work. Debbie, you've been involved in many different sports in your 22 years, haven't you?
-                      <br><br>Debbie: Yes, quite a few! I started off playing football at county level and then got into coaching. I reckoned that I wouldn't have been able to play football without the help of volunteers, so when I had the chance to help other people, I did. Then I started a degree in Sport Development and I realised that lots of people like me would soon have a degree and be looking for a job and I'd need more experience to compete with them all!
+                      <br><br>Debbie: Yes, quite a few! I started off playing football at county level and then got into coaching. I reckoned that I wouldn't have been able to play football without the help of volunteers, so when I had the chance to help other people, I did. <span class="transcript-answer"><b>(Q4 Answer) </b>Then I started a degree in Sport Development and I realised that lots of people like me would soon have a degree and be looking for a job and I'd need more experience to compete with them all!</span>
                       <br><br>Interviewer: So you volunteered again?
                       <br><br>Debbie: Yes, I spent a year helping with an online sports volunteering bureau and volunteered at various events including a cricket tournament, a table tennis championship and a half marathon.
                       <br><br>Interviewer: Wow, that's a lot of experience!
                       <br><br>Debbie: Yes. I must add that I don't actually play cricket or table tennis myself, though I do run. You don't have to be an expert in a sport to volunteer - there are lots of jobs that need doing.
                       <br><br>Interviewer: And now you've finished your degree and you're working.
-                      <br><br>Debbie: That's right. I wrote my dissertation on the retention and recruitment of volunteers, and now I manage volunteers for an organisation promoting swimming. I also organise events at a national level. I would never have got the job without all my volunteering experience. It helped me loads.
+                      <br><br>Debbie: That's right. <span class="transcript-answer"><b>(Q5 Answer) </b>I wrote my dissertation on the retention and recruitment of volunteers, and now I manage volunteers for an organisation promoting swimming.</span> I also organise events at a national level. I would never have got the job without all my volunteering experience. It helped me loads.
                       <br><br>Interviewer: And finally, a question for you both. Do you think we sometimes exploit volunteers in this country? Are they doing things for free when they ought to be getting paid? Liam, I believe that you volunteer for about ten or twenty hours a week. Do you ever feel that you should be paid for what you do?
                       <br><br>Liam: Well, of course, it would be nice. But the organisation I help is non-profit-making and it couldn't really afford to pay all the volunteers. At the moment, I'm happy to do what I love and gain experience of dealing with the public. I'm living with my parents and they are paying my keep. In the future I'll have to look for paid work.
-                      <br><br>Debbie: I think many volunteers feel they want to give something back to their sport. It was like that for me with football. Ideally it would be good to have more paid positions, but we also need volunteers. Sport just couldn't function without them. It is really important to give people recognition for what they do, though.
+                      <br><br>Debbie: <span class="transcript-answer"><b>(Q6 Answer) </b>I think many volunteers feel they want to give something back to their sport. It was like that for me with football. Ideally it would be good to have more paid positions, but we also need volunteers. Sport just couldn't function without them. It is really important to give people recognition for what they do, though.</span>
                       <br><br>Interviewer: Thanks very much for sharing your experiences. And now, we're going to move on...
                     </p>
                   </div>
+                </div>
+
+                <!-- Audio area -->
+                <!-- The audio is extracted from: https://learnenglishteens.britishcouncil.org/skills/listening/c1-listening/help-others-help-yourself -->
+                <div class="my-1" :class="{'col-lg-6': checked, 'col': !checked}">
+                  <audioplayer :audio-title="'Help others help yourself'" :audio-description="'Listen to an interview of young volunteers for sports centers and organizations.'" :audio-name="'help_others_help_yourself.mp3'" :audio-play-count="playCount" :checked="checked" @audio-ended="handleAudioEnded"></audio-player>
                 </div>
               </div>
             </div>

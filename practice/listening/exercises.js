@@ -320,16 +320,16 @@ const app = createApp({
           
           if (currentIndex === "-1")             // No se esta reproduciendo nada
           {             
-            resultAudio.src = `audio/help_others_help_yourself.mp3`;
+            resultAudio.src = `audio/help_others_help_yourself_${questionIndex + 1}.mp3`;
             resultAudio.play();
             resultAudio.addEventListener("ended", () => { resultButtonImage.src = '../../img/listening/play.png'; });
             resultButtonImage.src = '../../img/listening/pause.png';
             resultAudio.dataset.index = `${questionIndex}`;
             resultAudio.dataset.paused = '0';
           } 
-          else if (currentIndex !== `${i}`)      // Se esta reproduciendo otro audio
+          else if (currentIndex !== `${questionIndex}`)      // Se esta reproduciendo otro audio
           {    
-            resultAudio.src = `audio/help_others_help_yourself.mp3`;
+            resultAudio.src = `audio/help_others_help_yourself_${questionIndex + 1}.mp3`;
             resultAudio.play();
             resultAudio.addEventListener("ended", () => { resultButtonImage.src = '../../img/listening/play.png'; });
             document.getElementById(`${currentIndex}resultButtonImage`).src = '../../img/listening/play.png';

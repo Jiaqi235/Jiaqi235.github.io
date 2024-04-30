@@ -41,3 +41,8 @@
 .incorrect-answer {
   color: red;
 }
+
+.transcript-answer {
+  background-color: rgb(198, 255, 198);
+  text-decoration: underline; /* For visibility aside from color */
+}

@@ -23,7 +23,6 @@
   margin-right: 10px;
 }
 
-
 #theme-dropdown {
   padding: 10px;
   border-radius: 5px;
@@ -35,6 +34,5 @@
   /* No idea why these need be different to align with the cards */
   padding-left: 1.6rem;
   padding-right: 1.2rem;
-  margin-bottom: 10px;
 }
   

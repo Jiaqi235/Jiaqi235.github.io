@@ -124,7 +124,7 @@ const Exercise = {
     leftButtonClass(index) {
       if (this.correctRelations[index]) {
         return {
-          'btn-success': true,
+          'btn-outline-success': true,
           'disabled': true,
         }
       } else {
@@ -132,23 +132,25 @@ const Exercise = {
           // Fade out paired words,
           // or if a different word from the left column is currently selected (helps guide the user to match them between the 2 columns)
           'faded-out': this.relations[index] != undefined || (this.selectedLeftOptionIndex >= 0 && this.selectedLeftOptionIndex != index),
-          'btn-outline-primary': this.selectedLeftOptionIndex != index,
-          'btn-primary': this.selectedLeftOptionIndex == index,
+          'btn-outline-primary': this.selectedLeftOptionIndex != index && this.relations[index] != undefined,
+          'btn-primary': this.relations[index] == undefined,
+          'active': this.selectedLeftOptionIndex == index,
         }
       }
     },
     rightButtonClass(index) {
       if (this.correctRelations[reverseLookup(this.relations, index)]) {
         return {
-          'btn-success': true,
+          'btn-outline-success': true,
           'disabled': true,
         }
       } else {
         return {
           // Fade out paired words
-          'faded-out': this.relations[reverseLookup(this.relations, index)] != undefined,
-          'btn-outline-primary': this.selectedRightOptionIndex != index,
-          'btn-primary': this.selectedRightOptionIndex == index,
+          'faded-out': this.relations[reverseLookup(this.relations, index)] != undefined || (this.selectedRightOptionIndex >= 0 && this.selectedRightOptionIndex != index),
+          'btn-outline-primary': this.selectedRightOptionIndex != index && this.relations[reverseLookup(this.relations, index)] != undefined,
+          'btn-primary': this.relations[reverseLookup(this.relations, index)] == undefined,
+          'active': this.selectedRightOptionIndex == index,
         }
       }
     },
