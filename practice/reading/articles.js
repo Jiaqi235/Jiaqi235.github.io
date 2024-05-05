@@ -52,8 +52,8 @@ const app = createApp({
             },
             {
               theme: "art",
-              name: "Origami in space",
-              description: "The art of folding paper is also used in space to deploy devices.",
+              name: "Origami",
+              description: "The art of folding paper to create figures.",
               icon: "/img/select/origami.svg",
               href: "NOT_AVAILABLE"
             },
