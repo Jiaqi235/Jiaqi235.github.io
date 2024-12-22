@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- In your public/index.html file inside <head> tag -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Carlito&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <title>Xenoground</title>
+  <style>
+    /* Reset default margins and paddings */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Ensure html and body take up the full height and width */
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden; /* Prevent scrollbars unless explicitly needed */
+    }
+
+    /* Make sure #app container fills the viewport */
+    #app {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      background-color: #223244;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+</body>
+</html>
