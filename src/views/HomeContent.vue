@@ -270,9 +270,12 @@ export default {
       this.currentStep = step;
     },
     downloadPDF() {
-      // Load jsPDF and Carlito font
-      const { jsPDF } = window.jspdf; // Access jsPDF
+      // Load jsPDF
+      const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
+      const pageHeight = doc.internal.pageSize.height; // Get the height of the page
+      const margin = 10; // Top and bottom margins
+      const maxYPosition = pageHeight - margin; // Maximum usable vertical space
 
       // Prompt the user for a PDF file name
       const fileName = prompt("Enter the file name for the PDF:", "kolbs-reflection.pdf");
@@ -281,54 +284,91 @@ export default {
         return;
       }
 
+      // Helper function to add text with dynamic spacing
+      const addTextWithSpacing = (doc, text, x, y, maxWidth, lineHeight) => {
+        const lines = doc.splitTextToSize(text, maxWidth); // Wrap text
+        for (const line of lines) {
+          if (y + lineHeight > maxYPosition) {
+            doc.addPage();
+            y = margin; // Reset to the top of the new page
+          }
+          doc.text(line, x, y); // Add each line individually
+          y += lineHeight;
+        }
+        return y;
+      };
+
+      // Start at the top margin of the first page
+      let yPosition = margin;
+
       // Loop through the cyclesData and add each cycle to the PDF
       this.cyclesData.forEach((cycle, index) => {
         const cycleNumber = index + 1; // To display "Cycle 1", "Cycle 2", etc.
 
+        // Check if adding the header would exceed the page, add a new page if necessary
+        if (yPosition + 10 > maxYPosition) {
+          doc.addPage();
+          yPosition = margin; // Reset to the top of the new page
+        }
         // Title 1: Cycle header
-        doc.setFontSize(16); // Title 1 size
-        doc.setFont("Helvetica", "bold"); // Use Carlito font (bold)
-        doc.text(`Cycle ${cycleNumber}`, 10, 10); // Add the cycle header
+        doc.setFontSize(16);
+        doc.setFont("Helvetica", "bold");
+        doc.text(`Cycle ${cycleNumber}`, 10, yPosition);
+        yPosition += 10;
 
         // Title 2: Experience & Motivation
-        doc.setFontSize(14); // Title 2 size
-        doc.setFont("Helvetica", "bold"); // Title 2 font style (Bold)
-        doc.text(`1. Experience & Motivation:`, 10, 20);
-        doc.setFont("Helvetica", "normal"); // Normal text style
-        doc.text(`${cycle.experience}`, 10, 25);
-        doc.text(`${cycle.motivation}`, 10, 30);
+        doc.setFontSize(14);
+        doc.setFont("Helvetica", "bold");
+        doc.text(`1. Experience & Motivation:`, 10, yPosition);
+        yPosition += 6;
+        doc.setFont("Helvetica", "normal");
+        yPosition = addTextWithSpacing(doc, cycle.experience, 10, yPosition, 180, 6);
+        yPosition = addTextWithSpacing(doc, cycle.motivation, 10, yPosition, 180, 6);
 
-        // Title 2: Reflection section
-        doc.setFontSize(14); // Title 2 size
-        doc.setFont("Helvetica", "bold"); // Title 2 font style (Bold)
-        doc.text(`2. Reflection:`, 10, 40);
-        doc.setFont("Helvetica", "normal"); // Normal text style
-        doc.text(`${cycle.sequence}`, 10, 45);
-        doc.text(`${cycle.feelings}`, 10, 50);
-        doc.text(`${cycle.triggers}`, 10, 55); // Optional: Default "N/A" if no trigger
-        doc.text(`${cycle.difficultiesSuccesses}`, 10, 60);
-        doc.text(`${cycle.challengeResponse}`, 10, 65);
-        doc.text(`${cycle.why}`, 10, 70); // Optional: Default "N/A" if no why
-
-        // Title 2: Abstraction section
-        doc.setFontSize(14); // Title 2 size
-        doc.setFont("Helvetica", "bold"); // Title 2 font style (Bold)
-        doc.text(`3. Abstraction:`, 10, 80);
-        doc.setFont("Helvetica", "normal"); // Normal text style
-        doc.text(`${cycle.abstraction}`, 10, 85);
-        doc.text(`${cycle.similarities}`, 10, 90);
-
-        // Title 2: Experiment section
-        doc.setFontSize(14); // Title 2 size
-        doc.setFont("Helvetica", "bold"); // Title 2 font style (Bold)
-        doc.text(`4. Experiment:`, 10, 100);
-        doc.setFont("Helvetica", "normal"); // Normal text style
-        doc.text(`${cycle.experiment}`, 10, 105);
-
-        // Add page break for the next cycle, if not the last cycle
-        if (index < this.cyclesData.length - 1) {
+        // Title 3: Reflection
+        doc.setFontSize(14);
+        doc.setFont("Helvetica", "bold");
+        yPosition += 10; // Add space before the next section
+        if (yPosition > maxYPosition) {
           doc.addPage();
+          yPosition = margin;
         }
+        doc.text(`2. Reflection:`, 10, yPosition);
+        yPosition += 6;
+        doc.setFont("Helvetica", "normal");
+        yPosition = addTextWithSpacing(doc, cycle.sequence, 10, yPosition, 180, 6);
+        yPosition = addTextWithSpacing(doc, cycle.feelings, 10, yPosition, 180, 6);
+        yPosition = addTextWithSpacing(doc, cycle.triggers, 10, yPosition, 180, 6);
+        yPosition = addTextWithSpacing(doc, cycle.difficultiesSuccesses, 10, yPosition, 180, 6);
+        yPosition = addTextWithSpacing(doc, cycle.challengeResponse, 10, yPosition, 180, 6);
+        yPosition = addTextWithSpacing(doc, cycle.why, 10, yPosition, 180, 6);
+
+        // Title 4: Abstraction
+        doc.setFontSize(14);
+        doc.setFont("Helvetica", "bold");
+        yPosition += 10; // Add space before the next section
+        if (yPosition > maxYPosition) {
+          doc.addPage();
+          yPosition = margin;
+        }
+        doc.text(`3. Abstraction:`, 10, yPosition);
+        yPosition += 6;
+        doc.setFont("Helvetica", "normal");
+        yPosition = addTextWithSpacing(doc, cycle.abstraction, 10, yPosition, 180, 6);
+        yPosition = addTextWithSpacing(doc, cycle.similarities, 10, yPosition, 180, 6);
+
+        // Title 5: Experiment
+        doc.setFontSize(14);
+        doc.setFont("Helvetica", "bold");
+        yPosition += 10; // Add space before the next section
+        if (yPosition > maxYPosition) {
+          doc.addPage();
+          yPosition = margin;
+        }
+        doc.text(`4. Experiment:`, 10, yPosition);
+        yPosition += 6;
+        doc.setFont("Helvetica", "normal");
+        yPosition = addTextWithSpacing(doc, cycle.experiment, 10, yPosition, 180, 6);
       });
 
       // Download the generated PDF with the user-specified file name
